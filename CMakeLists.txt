@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 include(CMakeDependentOption)
 
 set(TARGET_PLATFORM "default" CACHE STRING "Platform to cross-compile for. Options: vita switch android emscripten. Leave blank for no cross compilation")
-set_property(CACHE TARGET_PLATFORM PROPERTY STRINGS default vita switch android emscripten)
+set_property(CACHE TARGET_PLATFORM PROPERTY STRINGS default vita switch wii gamecube android emscripten)
 
 string(TOLOWER ${TARGET_PLATFORM} TARGET_PLATFORM)
 
@@ -36,6 +36,10 @@ if(${TARGET_PLATFORM} STREQUAL "emscripten" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE
     else()
         message(FATAL_ERROR "Please define EMSDK to point to your Emscripten SDK path!")
     endif()
+endif()
+
+if(${TARGET_PLATFORM} STREQUAL "gamecube" OR NINTENDO_GAMECUBE)
+    message(FATAL_ERROR "GameCube has insufficient RAM to run Julius.")
 endif()
 
 set(SHORT_NAME julius)

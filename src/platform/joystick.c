@@ -100,7 +100,7 @@ static mapping_element default_mapping[] = {
 
 static int use_joystick(void)
 {
-#if defined(__vita__) || defined(__SWITCH__)
+#if defined(__vita__) || defined(__SWITCH__) || defined(__gamecube__)
     return 1;
 #else
     return 0;

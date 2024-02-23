@@ -83,7 +83,7 @@ static void handler(int sig)
     exit_with_status(1);
 }
 
-#if defined(_WIN32) || defined(__vita__) || defined(__SWITCH__) || defined(__ANDROID__)
+#if defined(_WIN32) || defined(__vita__) || defined(__SWITCH__) || defined(__ANDROID__) || defined (__wii__) || defined (__gamecube__)
 /* Log to separate file on windows, since we don't have a console there */
 static FILE *log_file = 0;
 

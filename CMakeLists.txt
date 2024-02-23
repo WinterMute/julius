@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 include(CMakeDependentOption)
 
 set(TARGET_PLATFORM "default" CACHE STRING "Platform to cross-compile for. Options: vita switch android ios emscripten. Leave blank for no cross compilation")
-set_property(CACHE TARGET_PLATFORM PROPERTY STRINGS default vita switch android ios emscripten)
+set_property(CACHE TARGET_PLATFORM PROPERTY STRINGS default vita switch wii gamecube android ios emscripten)
 
 string(TOLOWER ${TARGET_PLATFORM} TARGET_PLATFORM)
 
@@ -65,6 +65,10 @@ if(${TARGET_PLATFORM} STREQUAL "ios")
     set(CMAKE_XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1,2")
 endif()
 
+
+if(${TARGET_PLATFORM} STREQUAL "gamecube" OR NINTENDO_GAMECUBE)
+    message(FATAL_ERROR "GameCube has insufficient RAM to run Julius.")
+endif()
 
 set(SHORT_NAME julius)
 set(USER_FRIENDLY_NAME Julius)
